@@ -49,7 +49,7 @@ function makeRandomCover() {
 } 
 
 function displayRandomCover() {
-  console.log(makeRandomCover())
+  makeRandomCover()
   displayCoverImage.src = currentCover.cover
   displayCoverTitle.innerText = currentCover.title
   displayTagline1.innerText = currentCover.tagline1
@@ -66,7 +66,7 @@ function viewSavedCovers() {
   gallery.innerHTML += ''
   for(var i = 0; i < savedCovers.length; i++){
   gallery.innerHTML += `
-  <section class="saved-covers-section" id=${i}>
+  <section class="saved-covers-section" id=${savedCovers[i].id}>
     <section class="saved-covers-section mini-cover">
       <img class="cover-image" src="${savedCovers[i].cover}">
       <h2 class="cover-title">${savedCovers[i].title}</h2>
@@ -124,6 +124,10 @@ function displayHomePage() {
 }
 
 function deleteCover() {
-  savedCovers.splice(section.id, 1)
-  selection.remove()
+  for (var i = 0; i < savedCovers.length; i++) {
+    if (savedCovers[i].id === Number(event.target.parentNode.id)) {
+    savedCovers.splice(i, 1) 
+    }
+  }
 }
+
